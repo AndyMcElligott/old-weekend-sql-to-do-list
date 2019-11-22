@@ -10,9 +10,9 @@ function onReady(){
 function handleSubmit(){
     console.log('Submit button clicked.');
     let list = {};
-    list.task = $('#task').val();
-    list.status = $('#status').val();
-    list.location = $('#location').val();
-    list.est_time = $('#est_time').val();
-    //function(list);
+        list.task = $('#task').val();
+        list.status = $('#status').val();
+        list.location = $('#location').val();
+        list.est_time = $('#est_time').val();
+        //function(list);
 }

@@ -14,5 +14,19 @@ function handleSubmit(){
         list.status = $('#status').val();
         list.location = $('#location').val();
         list.est_time = $('#est_time').val();
-        //function(list);
+        addTask(list);
+}
+
+function addTask(taskToAdd) {
+    $.ajax({
+        type: 'POST',
+        url: '/tasks',
+        data: taskToAdd
+    }).then( function (response) {
+        console.log('Response from server:', response);
+        //function to go here to update DOM
+    }).catch(function(error) {
+        console.log('Error in POST', error)
+        alert('Unable to add task at this time. Please try again later.');
+    });
 }

@@ -14,12 +14,26 @@
         <section>
             <h3>Add New Task</h3>
             <label>Task:</label><input type="text" name="" value="" id="title">
-            <br/>
             <label>Status:</label><input type="text" name="" value="" id="status">
-            <br/>
             <label>Location:</label><input type="text" name="" value="" id="location">
-            <br/>
-            <label>Estimated Time:</label><input type="text" name="" value="" id="estTime">
+            <label>Estimated Time in hours:</label><input type="number" name="" value="" id="estTime">
+            <button type="button" id="submitBtn">Add</button>
+        </section>
+        <section>
+            <div>
+                <h3>Current To Do List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Status</th>
+                            <th>Location</th>
+                            <th>Estimated Time in Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskList"></tbody>
+                </table>
+            </div>
         </section>
     </main>
 </body>

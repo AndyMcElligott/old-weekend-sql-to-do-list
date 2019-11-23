@@ -24,9 +24,39 @@ function addTask(taskToAdd) {
         data: taskToAdd
     }).then( function (response) {
         console.log('Response from server:', response);
-        //function to go here to update DOM
+        refreshTasks();
     }).catch(function(error) {
         console.log('Error in POST', error)
         alert('Unable to add task at this time. Please try again later.');
     });
+}
+
+// Begin refreshTasks to get all tasks from server and render to DOM
+function refreshTasks(){
+    $.ajax({
+        type: 'GET',
+        url: '/books'
+    }).then(function(response) {
+        console.log(response);
+        renderTasks(response);
+      }).catch(function(error){
+        console.log('error in GET', error);
+      });
+    }
+
+// Displays an array of tasks to the DOM
+function renderTasks(tasks) {
+    console.log('in renderTasks', tasks);
+    $('#taskList').empty();
+    
+    for (let i=0; i<tasks.length; i++ ) {
+        let taco = tasks[i];
+        let $tr = $(`<tr></tr>`);
+            $tr.append(`<td>${taco.task}</td>`);
+            $tr.append(`<td>${taco.location}</td>`);
+            $tr.append(`<td>${taco.status}</td>`);
+            $tr.append(`<td>${taco.est_time}</td>`);
+            $tr.append(`<td><button class="deleteBtn">Done!</button></td>`);
+        $('#taskList').append($tr);
+    }
 }

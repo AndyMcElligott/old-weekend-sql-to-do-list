@@ -1,7 +1,13 @@
-$(document).ready(onReady);
+console.log( 'js' );
+
+$(document).ready(function(){
+    console.log( 'jQuery sourced.');
+    refreshTasks();
+    addClickHandlers();
+});
 
 //onReady function, click handlers
-function onReady(){
+function addClickHandlers(){
     console.log('in onReady function');
     $('#submitBtn').on('click', handleSubmit);
 }
@@ -35,7 +41,7 @@ function addTask(taskToAdd) {
 function refreshTasks(){
     $.ajax({
         type: 'GET',
-        url: '/books'
+        url: '/tasks'
     }).then(function(response) {
         console.log(response);
         renderTasks(response);
@@ -50,13 +56,28 @@ function renderTasks(tasks) {
     $('#taskList').empty();
     
     for (let i=0; i<tasks.length; i++ ) {
-        let taco = tasks[i];
+        let list = tasks[i];
         let $tr = $(`<tr></tr>`);
-            $tr.append(`<td>${taco.task}</td>`);
-            $tr.append(`<td>${taco.location}</td>`);
-            $tr.append(`<td>${taco.status}</td>`);
-            $tr.append(`<td>${taco.est_time}</td>`);
+            $tr.append(`<td>${list.task}</td>`);
+            $tr.append(`<td>${list.location}</td>`);
+            $tr.append(`<td>${list.status}</td>`);
+            $tr.append(`<td>${list.est_time}</td>`);
             $tr.append(`<td><button class="deleteBtn">Done!</button></td>`);
         $('#taskList').append($tr);
     }
 }
+
+// put in router and update name (koala holla)
+function updateTask(){
+    let id = $(this).closest(`tr`).data(`id`);
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${id}`
+    }).then(function( response){
+        refreshTasks();
+    }).catch( function (error){
+        alert(`something went wrong in POST CLIENT`);
+        console.log(error);
+    });
+}
+

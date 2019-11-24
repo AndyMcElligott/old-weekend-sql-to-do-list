@@ -1,17 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const listRouter = require('./routes/toDo.router.js');
-
 const app = express();
+const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 5000;
+const listRouter = require('./routes/toDo.router');
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/list', listRouter);
+//Routes
+app.use('/tasks', listRouter);
 
 // Serve back static files by default
-app.use(express.static('server/public'))
+app.use(express.static('server/public'));
 
 // Start listening for requests on a specific port
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
 });

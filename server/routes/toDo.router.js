@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 // Get all Tasks
-listRouter.get('/', (req, res)=>{
+router.get('/', (req, res)=>{
     let queryText = 'SELECT * FROM "list" ORDER BY "status";';
     pool.query(queryText).then(result => {
         res.sendStatus(result.rows);
@@ -14,7 +14,7 @@ listRouter.get('/', (req, res)=>{
 });
 
 //POST
-listRouter.post('/', (req, res)=>{
+router.post('/', (req, res)=>{
     let newTask = req.body;
         console.log ('Adding new task', newTask);
     let queryText = `INSERT INTO "list"("task", "status", "location", "est_time") VALUES($1, $2, $3, $4);`
@@ -28,7 +28,7 @@ listRouter.post('/', (req, res)=>{
 });
 
 //PUT
-listRouter.put('/:id', (req, res) =>{
+router.put('/:id', (req, res) =>{
     let id = [req.params.id];
     let queryText = `UPDATE "list" SET "status" = 'completed' WHERE "id"= $1`; // correct? no ID's in DB...
     pool.query( queryText, id).then( result => {
@@ -39,4 +39,11 @@ listRouter.put('/:id', (req, res) =>{
     });
 });
 
-module.exports = listRouter;
+// Delete
+router.delete('/:id', (req, res) =>{
+    let id = req.params.id;
+    console.log('Delete route called with id of', id);
+    res.sendStatus(500);
+});
+
+module.exports = router;

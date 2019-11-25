@@ -2,7 +2,7 @@ console.log( 'js' );
 
 $(document).ready(function(){
     console.log( 'jQuery sourced.');
-    refreshTasks();
+    getTasks();
     handleSubmit();
 });
 
@@ -13,29 +13,33 @@ $(document).ready(function(){
 // }
 
 //handleSubmit function
-function handleSubmit(){
+function handleSubmit() {
     $(`#taskList`).on(`click`, `.deleteBtn`, updateTask);
-    $('#submitBtn').on(`click`,function(){
+    $('#submitBtn').on(`click`, addTask );   
+};
+
+//function getTasks () {
+    /*
     console.log('Submit button clicked.');
-    let list = {
-        task = $(`#task`).val(),
-        status = $(`#status`).val(),
-        location = $(`#location`).val(),
-        est_time = $(`#est_time`).val()
-    })
-        addTask(list);
-    }
+    
+    addTask(list);
+    */
+//}
 
-
-
-function addTask(taskToAdd) {
+function addTask() {
+    //Create the new task as an object
+    let newTask = {
+        task: $(`#task`).val(),
+    };
+    console.log(newTask)
+    //Deliver new task through AJAX
     $.ajax({
         type: 'POST',
         url: '/tasks',
-        data: taskToAdd
+        data: newTask
     }).then( function (response) {
         console.log('Response from server:', response);
-        refreshTasks();
+        getTasks();
     }).catch(function(error) {
         console.log('Error in POST', error)
         alert('Unable to add task at this time. Please try again later.');
@@ -43,17 +47,18 @@ function addTask(taskToAdd) {
 }
 
 // Begin refreshTasks to get all tasks from server and render to DOM
-function refreshTasks(){
+function getTasks() {
     $.ajax({
         type: 'GET',
         url: '/tasks'
     }).then(function(response) {
         console.log('in THEN GET', response);
         renderTasks(response);
-      }).catch(function(error){
+    }).catch(function(error){
         console.log('error in GET', error);
-      });
-    }
+    });
+}
+
 // Displays an array of tasks to the DOM
 function renderTasks(tasks) {
     console.log('in renderTasks', tasks);

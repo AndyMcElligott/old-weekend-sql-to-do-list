@@ -3,24 +3,27 @@ console.log( 'js' );
 $(document).ready(function(){
     console.log( 'jQuery sourced.');
     refreshTasks();
-    addClickHandlers();
+    handleSubmit();
 });
 
-//onReady function, click handlers
-function addClickHandlers(){
-    console.log('in onReady function');
-    $('#submitBtn').on('click', handleSubmit);
-}
+// //onReady function, click handlers
+// function addClickHandlers(){
+//     console.log('in onReady function');
+//     $('#submitBtn').on('click', handleSubmit);
+// }
 
 //handleSubmit function
 function handleSubmit(){
+    $(`#taskList`).on(`click`, `.deleteBtn`, updateTask);
+    $('#submitBtn').on(`click`,function() {
     console.log('Submit button clicked.');
     let list = {};
-        list.task = $('#task').val();
-        list.status = $('#status').val();
-        list.location = $('#location').val();
-        list.est_time = $('#est_time').val();
-        addTask(list);
+        list.task = $(`#task`).val();
+        list.status = $(`#status`).val();
+        list.location = $(`#location`).val();
+        list.est_time = $(`#est_time`).val();
+    addTask(list);
+    });
 }
 
 function addTask(taskToAdd) {
@@ -43,13 +46,12 @@ function refreshTasks(){
         type: 'GET',
         url: '/tasks'
     }).then(function(response) {
-        console.log(response);
+        console.log('in THEN GET', response);
         renderTasks(response);
       }).catch(function(error){
         console.log('error in GET', error);
       });
     }
-
 // Displays an array of tasks to the DOM
 function renderTasks(tasks) {
     console.log('in renderTasks', tasks);
@@ -58,12 +60,13 @@ function renderTasks(tasks) {
     for (let i=0; i<tasks.length; i++ ) {
         let list = tasks[i];
         let $tr = $(`<tr></tr>`);
+            $tr.data('list', list );
             $tr.append(`<td>${list.task}</td>`);
             $tr.append(`<td>${list.location}</td>`);
             $tr.append(`<td>${list.status}</td>`);
             $tr.append(`<td>${list.est_time}</td>`);
             $tr.append(`<td><button class="deleteBtn">Done!</button></td>`);
-        $('#taskList').append($tr);
+            $('#taskList').append($tr);
     }
 }
 

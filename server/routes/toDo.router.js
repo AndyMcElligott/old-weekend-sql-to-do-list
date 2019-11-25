@@ -29,12 +29,13 @@ router.post('/', (req, res)=>{
 
 //PUT
 router.put('/:id', (req, res) =>{
+    let list = req.body;
     let id = [req.params.id];
     let queryText = `UPDATE "list" SET "status" = 'completed' WHERE "id"= $1`; // correct? no ID's in DB...
     pool.query( queryText, id).then( result => {
         res.sendStatus(201);
     }).catch( error => {
-        console.log(`Updating list status ${id} with `, id);
+        console.log(`Updating list status ${id} with `, list);
         res.sendStatus(500);
     });
 });

@@ -15,16 +15,18 @@ $(document).ready(function(){
 //handleSubmit function
 function handleSubmit(){
     $(`#taskList`).on(`click`, `.deleteBtn`, updateTask);
-    $('#submitBtn').on(`click`,function() {
+    $('#submitBtn').on(`click`,function(){
     console.log('Submit button clicked.');
-    let list = {};
-        list.task = $(`#task`).val();
-        list.status = $(`#status`).val();
-        list.location = $(`#location`).val();
-        list.est_time = $(`#est_time`).val();
-    addTask(list);
-    });
-}
+    let list = {
+        task = $(`#task`).val(),
+        status = $(`#status`).val(),
+        location = $(`#location`).val(),
+        est_time = $(`#est_time`).val()
+    })
+        addTask(list);
+    }
+
+
 
 function addTask(taskToAdd) {
     $.ajax({

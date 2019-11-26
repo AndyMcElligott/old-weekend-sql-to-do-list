@@ -14,7 +14,8 @@ $(document).ready(function(){
 
 //handleSubmit function
 function handleSubmit() {
-    $(`#taskList`).on(`click`, `.deleteBtn`, updateTask);
+    $(`#taskList`).on(`click`, `.deleteBtn`, deleteTask);
+    $(`#completeBtn`).on(`click`, updateTask);
     $('#submitBtn').on(`click`, addTask );   
 };
 
@@ -55,7 +56,7 @@ function getTasks() {
         console.log('in THEN GET', response);
         renderTasks(response);
     }).catch(function(error){
-        console.log('error in GET', error);
+        alert(console.log('error in GET', error));
     });
 }
 
@@ -72,22 +73,44 @@ function renderTasks(tasks) {
             $tr.append(`<td>${list.location}</td>`);
             $tr.append(`<td>${list.status}</td>`);
             $tr.append(`<td>${list.est_time}</td>`);
-            $tr.append(`<td><button class="deleteBtn">Done!</button></td>`);
+            $tr.append(`<td><button class="deleteBtn">Delete!</button></td>`);
+            $tr.append(`<td><button class="completeBtn">Completed!</button></td>`);
             $('#taskList').append($tr);
     }
 }
 
 // put in router and update name (koala holla)
 function updateTask(){
-    let id = $(this).closest(`tr`).data(`id`);
+    let id = $(this).data(`id`);
     $.ajax({
-        method: 'PUT',
+        type: 'PUT',
         url: `/tasks/${id}`
     }).then(function( response){
-        refreshTasks();
+        console.log( 'back from PUT with:', response );
+        getTasks();
     }).catch( function (error){
-        alert(`something went wrong in POST CLIENT`);
+        alert(`something went wrong in PUT CLIENT`);
         console.log(error);
     });
 }
 
+function deleteTask(){
+    let id = $( this ).data( 'id' );
+    console.log( 'in deleteTask:', id );
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${id}`
+    }).then( function( response ){
+        console.log( 'back from delete:', response );
+        getTasks();
+    }).catch( function( err ){
+        console.error( err );
+        alert( 'error deleting task, see console for deets' );
+    })
+}
+
+let all_tr = $('tr');
+$('td input[type="button"]').on('click', function(){
+    all_tr.removeClass('selected');
+    $(this).closest('tr').addClass('selected');
+});

@@ -43,10 +43,22 @@ router.put('/:id', (req, res) =>{
 });
 
 // Delete
-router.delete('/:id', (req, res) =>{
-    let id = req.params.id;
-    console.log('Delete route called with id of', id);
-    res.sendStatus(500);
-});
+// router.delete('/:id', (req, res) =>{
+//     let id = req.params.id;
+//     console.log('Delete route called with id of', id);
+//     res.sendStatus(500);
+// });
+
+router.delete( '/:id', ( req, res )=>{
+    console.log( 'in DELETE, removing task with ID:', req.params );
+    let queryString = `DELETE FROM tasks WHERE id=($1)`;
+    pool.query( queryString, [ req.params.id ] ).then( ( result )=>{
+        console.log( 'deleted' );
+        res.sendStatus( 200 );
+    }).catch( ( err )=>{
+        console.log( err );
+        res.sendStatus( 400 );
+    }) // end DELETE
+}) // end DELETE
 
 module.exports = router;

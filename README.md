@@ -18,7 +18,7 @@ Screen Shot
 
 
 Prerequisites
-Must lead a busy life, have a pulse, be able to fog a mirror, and posses basic internet and computer skills. MS Office experience not required.
+Must lead a busy life, have a pulse, be able to fog a mirror, and possess basic internet and computer skills. MS Office experience not required.
 
 Installation
 For best results, use the most up to date versions of: Visual Studio Code, Node Express, Express PostGres, Postico Database, 
@@ -38,4 +38,4 @@ Acknowledgement
 Thank you to the brilliant minds over at Prime Digital Academy for their unwavering support.
 
 Support
-The backbone of the effort to create this app was inspired by the Trifid Cohort.
+The inspiring effort to create this app was inspired by the Trifid Cohort.

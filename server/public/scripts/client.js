@@ -51,11 +51,11 @@ function getTasks() {
 function renderTasks(tasks) {
         console.log('in renderTasks', tasks);
         $('#taskList').empty();
-
         for (let i = 0; i < tasks.length; i++) {
                 const list = tasks[i];
                 const $tr = $(`<tr></tr>`);
                 $tr.data('list', list);
+                $tr.data('id', list.id);
                 $tr.append(`<td>${list.task}</td>`);
                 // $tr.append(`<td>${list.location}</td>`);
                 // $tr.append(`<td>${list.status}</td>`);

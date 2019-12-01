@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>To-Do List</title>
     <script type="text/javascript" src="vendors/jquery.js"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
-    <link rel="stylesheet" href="style/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/bootstrap-4.3.1.min.css" />
+    <link rel="stylesheet" href="style/styles.css" />
+  </head>
+  <body>
     <main>
-        <section>
-            <h3>Add New Task</h3>
-            <label>Task:</label><input type="text" name="" value="" id="task">
-            <!--<label>Status:</label><input type="text" name="" value="" id="status">
+      <section>
+        <h2>Weekend To-Do List</h2>
+        <label>Task:</label><input type="text" name="" value="" id="task" />
+        <!--<label>Status:</label><input type="text" name="" value="" id="status">
             <label>Location:</label><input type="text" name="" value="" id="location">
             <label>Estimated Time in hours:</label><input type="number" name="" value="" id="est_time">-->
-            <button type="button" id="submitBtn">Add</button>
-        </section>
-        <section>
-            <div>
-                <h3>Current To Do List</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Task</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="taskList"></tbody>
-                </table>
-            </div>
-        </section>
+        <button type="button" id="submitBtn">Add</button>
+      </section>
+      <section>
+        <div>
+          <h3>Current To Do List</h3>
+          <table>
+            <thead>
+              <tr>
+                <th id="taskOne">Task</th>
+                <th id="statusOne">Status</th>
+              </tr>
+            </thead>
+            <tbody id="taskList"></tbody>
+          </table>
+        </div>
+      </section>
     </main>
-</body>
+  </body>
 </html>

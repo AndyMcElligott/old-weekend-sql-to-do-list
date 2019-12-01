@@ -1,5 +1,43 @@
 body {
-    background-color: coral;
+  background-color: bisque;
+  text-align: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin: 3em;
+}
+
+#taskList {
+  margin-inline: auto;
+  color: darkslateblue;
+}
+
+h3 {
+  text-align: center;
+  color: darkslateblue;
+}
+
+#taskOne {
+  text-align: center;
+  color: darkslateblue;
+}
+
+#statusOne {
+  text-align: center;
+  color: darkslateblue;
+}
+
+h2 {
+  font-size: 3rem;
+  font-family: cursive;
+  text-align: center;
+  color: darkslateblue;
+}
+
+#task {
+  text-align: center;
+  color: darkslateblue;
+}
+
+table {
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

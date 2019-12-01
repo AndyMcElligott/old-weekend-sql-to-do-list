@@ -1,6 +1,6 @@
-CREATE TABLE "list" (
-	"id" varchar(250) not null, 
+CREATE TABLE "list"
+(
+	"id" serial primary key,
 	"task" varchar(250) not null,
 	"status" varchar(250) not null,
-	"location" varchar(250) not null
 );

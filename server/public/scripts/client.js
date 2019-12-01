@@ -5,7 +5,7 @@ $('document').ready(onReady);
 function onReady() {
         console.log('jQuery sourced.');
         $('#taskList').on(`click`, `.deleteBtn`, deleteTask);
-        $(`#completeBtn`).on(`click`, `.completeBtn`, updateTask);
+        $('#taskList').on('click', '.completeBtn', updateTask);
         $('#submitBtn').on(`click`, addTask);
         getTasks();
 }
@@ -56,19 +56,21 @@ function renderTasks(tasks) {
                 const $tr = $(`<tr></tr>`);
                 $tr.data('list', list);
                 $tr.data('id', list.id);
-                $tr.append(`<td>${list.task}</td>`);
+                $tr.append(`<td style="width: 400px;">${list.task}</td>`);
                 // $tr.append(`<td>${list.location}</td>`);
                 // $tr.append(`<td>${list.status}</td>`);
                 // $tr.append(`<td>${list.est_time}</td>`);
-                $tr.append(`<td><button class="deleteBtn">Delete!</button></td>`);
-                $tr.append(`<td><button class="completeBtn">Completed!</button></td>`);
+                $tr.append(`<td><button class="deleteBtn">Done</button></td>`);
+                $tr.append(`<td><button class="completeBtn">In Progress</button></td>`);
                 $('#taskList').append($tr);
         }
 }
 
 // put in router and update name
 function updateTask() {
-        const id = $(this).data(`id`);
+        const id = $(this)
+                .closest('tr')
+                .data('id');
         $.ajax({
                 type: 'PUT',
                 url: `/tasks/${id}`,

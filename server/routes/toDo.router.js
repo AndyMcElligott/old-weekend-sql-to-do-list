@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
         const newTask = req.body;
         console.log('Adding new task', newTask);
-        const queryText = `INSERT INTO "list"("task") VALUES($1);`;
+        const queryText = `INSERT INTO "list" ("task", "location") VALUES($1, 'unspecified');`;
 
         pool.query(queryText, [newTask.task])
                 .then(result => {
@@ -57,7 +57,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
         console.log('in DELETE, removing task with ID:', req.params);
         // const { id } = req.params;
-        const queryString = 'DELETE FROM "tasks" WHERE "id"=$1;';
+        const queryString = 'DELETE FROM "list" WHERE "id"=$1;';
         pool.query(queryString, [req.params.id])
                 .then(result => {
                         console.log('deleted');

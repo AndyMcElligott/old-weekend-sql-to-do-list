@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 
 // Get all Tasks
 router.get('/', (req, res) => {
-        const queryText = 'SELECT * FROM "list" ORDER BY "status";';
+        const queryText = 'SELECT * FROM "list" ORDER BY "task";';
         pool.query(queryText)
                 .then(result => {
                         res.send(result.rows);
@@ -18,11 +18,11 @@ router.get('/', (req, res) => {
 
 // POST
 router.post('/', (req, res) => {
-        const newTask = req.body;
-        console.log('Adding new task', newTask);
+        const newTaskOne = req.body;
+        console.log('Adding new task', newTaskOne);
         const queryText = `INSERT INTO "list" ("task") VALUES($1);`;
 
-        pool.query(queryText, [newTask.task])
+        pool.query(queryText, [newTaskOne.task])
                 .then(result => {
                         res.sendStatus(201);
                 })
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
         // const list = req.body;
         // const id = [req.params.id];
-        const queryText = `UPDATE "list" SET "status" = 'completed' WHERE "id"= $1`;
+        const queryText = `UPDATE "list" SET "task" = 'completed' WHERE "id"= $1`;
         pool.query(queryText, [req.params.id])
                 .then(result => {
                         res.sendStatus(201);

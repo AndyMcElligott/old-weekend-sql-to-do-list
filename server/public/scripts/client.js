@@ -60,8 +60,8 @@ function renderTasks(tasks) {
                 // $tr.append(`<td>${list.location}</td>`);
                 // $tr.append(`<td>${list.status}</td>`);
                 // $tr.append(`<td>${list.est_time}</td>`);
-                $tr.append(`<td><button class="deleteBtn">Done</button></td>`);
                 $tr.append(`<td><button class="completeBtn">In Progress</button></td>`);
+                $tr.append(`<td><button class="deleteBtn">Done</button></td>`);
                 $('#taskList').append($tr);
         }
 }

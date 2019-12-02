@@ -7,6 +7,7 @@ function onReady() {
         $('#taskList').on(`click`, `.deleteBtn`, deleteTask);
         $('#taskList').on('click', '.completeBtn', updateTask);
         $('#submitBtn').on(`click`, addTask);
+        $('#td').on('click', '.completeBtn', changeColor);
         getTasks();
 }
 
@@ -15,6 +16,7 @@ function addTask() {
         const newTask = {
                 task: $('#task').val(),
         };
+        $('#task').val('');
         console.log(newTask);
         // Deliver new task through AJAX
         $.ajax({
@@ -60,7 +62,7 @@ function renderTasks(tasks) {
                 // $tr.append(`<td>${list.location}</td>`);
                 // $tr.append(`<td>${list.status}</td>`);
                 // $tr.append(`<td>${list.est_time}</td>`);
-                $tr.append(`<td><button class="completeBtn">In Progress</button></td>`);
+                $tr.append(`<td><button class="completeBtn" id="completeBtnClick">In Progress</button></td>`);
                 $tr.append(`<td><button class="deleteBtn">Done</button></td>`);
                 $('#taskList').append($tr);
         }
@@ -77,6 +79,7 @@ function updateTask() {
         })
                 .then(function(response) {
                         console.log('back from PUT with:', response);
+                        // $('#completeBtn').on('click', )
                         getTasks();
                 })
                 .catch(function(error) {
@@ -120,6 +123,34 @@ function deleteTask() {
                         console.log(err);
                         alert('error deleting task, see console for deets');
                 });
+}
+function changeColor(){
+        const id = $(this)
+                .closest('tr')
+                .data('id');
+        $.ajax({
+                type: 'PUT',
+                url: `/tasks/${id}`,
+        })
+                .then(function(response) {
+                        console.log('back from PUT with:', response);
+                        // $('#completeBtn').on('click', )
+                        getTasks();
+                })
+                .catch(function(error) {
+                        alert(`something went wrong in PUT CLIENT CHANGE COLOR`);
+                        console.log(error);
+                });
+}
+
+
+function changeColor(response) {
+        const id = $(response)
+        .closest('td')
+        .data('id');
+               
+                $('#completeBtnClick').body.style.color = 'green';
+        return false;
 }
 
 // const all_tr = $('tr');

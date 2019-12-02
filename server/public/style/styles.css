@@ -28,7 +28,7 @@ h3 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 3em;
   font-family: cursive;
   text-align: center;
   color: darkslateblue;
@@ -41,4 +41,10 @@ h2 {
 
 table {
     text-align: center;
+}
+
+.completeBtnClick:focus
+{
+    font-size: 1em;
+    color: green
 }

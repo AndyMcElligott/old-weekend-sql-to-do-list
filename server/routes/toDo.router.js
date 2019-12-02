@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
         const newTask = req.body;
         console.log('Adding new task', newTask);
-        const queryText = `INSERT INTO "list" ("task") VALUES($1,);`;
+        const queryText = `INSERT INTO "list" ("task") VALUES($1);`;
 
         pool.query(queryText, [newTask.task])
                 .then(result => {

@@ -43,8 +43,12 @@ table {
     text-align: center;
 }
 
-.completeBtnClick:focus
+#completeBtnClick:focus
 {
     font-size: 1em;
     color: green
+}
+
+th.active {
+    color: green;
 }

@@ -7,7 +7,7 @@ function onReady() {
         $('#taskList').on(`click`, `.deleteBtn`, deleteTask);
         $('#taskList').on('click', '.completeBtn', updateTask);
         $('#submitBtn').on(`click`, addTask);
-        $('#td').on('click', '.completeBtn', changeColor);
+        $('#completeBtnClick').on(`click`, '.completeBtn', changeColor);
         getTasks();
 }
 
@@ -124,32 +124,31 @@ function deleteTask() {
                         alert('error deleting task, see console for deets');
                 });
 }
-function changeColor(){
-        const id = $(this)
-                .closest('tr')
-                .data('id');
-        $.ajax({
-                type: 'PUT',
-                url: `/tasks/${id}`,
-        })
-                .then(function(response) {
-                        console.log('back from PUT with:', response);
-                        // $('#completeBtn').on('click', )
-                        getTasks();
-                })
-                .catch(function(error) {
-                        alert(`something went wrong in PUT CLIENT CHANGE COLOR`);
-                        console.log(error);
-                });
-}
-
+// function changeColor(){
+//         const id = $(this)
+//                 .closest('tr')
+//                 .data('id');
+//         $.ajax({
+//                 type: 'PUT',
+//                 url: `/tasks/${id}`,
+//         })
+//                 .then(function(response) {
+//                         console.log('back from PUT with:', response);
+//                         // $('#completeBtn').on('click', )
+//                         getTasks();
+//                 })
+//                 .catch(function(error) {
+//                         alert(`something went wrong in PUT CLIENT CHANGE COLOR`);
+//                         console.log(error);
+//                 });
+// }
 
 function changeColor(response) {
-        const id = $(response)
-        .closest('td')
-        .data('id');
-               
-                $('#completeBtnClick').body.style.color = 'green';
+        const id = $(this)
+                .closest('td')
+                .data('id');
+
+        $('#completeBtnClick').body.style.color = 'green';
         return false;
 }
 
